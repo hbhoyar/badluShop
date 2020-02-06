@@ -1,0 +1,14 @@
+<form action="" method="post">
+    {% csrf_token %}
+
+    <div class="container">
+        <label for="loginName"><b>loginName</b></label>
+        <input type="text" placeholder="loginName" name="loginName" required>
+
+        <label for="password"><b>password</b></label>
+        <input type="password" placeholder="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </div>
+
+</form>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>Order-View-Create</h2>
+    <div id="orderHistory">
+        <h3>Order History</h3> 
+        <table>
+            <tr>
+                <th>OrderId</th>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Date</th>
+            </tr>
+            {% for orderId, item, val, date in orderHistory %}
+            <tr>
+                <td>{{orderId}}</td>
+                <td>{{item}}</td>
+                <td>{{val}}</td>
+                <td>{{date}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <br><br>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% for item in items %}
+        {{item}}:<br>
+        <input type="number" name="{{item}}">
+        <br>
+        {% endfor %}
+        <input type="submit" value="Submit">
+
+        <br><br>
+
+        {% if status == "success" %}
+        <div id="status">
+            Success: 
+            <table>
+                <tr>
+                    <th>item</th>
+                    <th>quantity</th>
+                    <th>orderId</th>
+                </tr>
+                {% for item, val, orderId in orders %}
+                <tr>
+                    <td>{{item}}</td>
+                    <td>{{val}}</td>
+                    <td>{{orderId}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+    </form>
+
+</body>
+
+</html>
