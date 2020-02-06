@@ -19,12 +19,12 @@ def orders(req):
     if not len(rows):
         return redirect('login')
 
-    sql = f"""select orderId, item, itemQuantity, dateTime from orderHistory 
+    historySql = f"""select orderId, item, itemQuantity, dateTime from orderHistory 
             where loginName='{loginName}' order by orderId desc limit 5 """
 
-    _, orderHistory = exec_query(conn, sql)
+    _, orderHistory = exec_query(conn, historySql)
 
-    print(orderHistory)
+    # print(orderHistory)
 
     if req.method == "GET":
         return render(req, 'orders.html', {
@@ -37,7 +37,12 @@ def orders(req):
         
         for item in items:
             try:
-                orders[item] = int(req.POST[item])
+                x = int(req.POST[item])
+                if x < 0:
+                    orders = {}
+                    break
+                elif x > 0:
+                    orders[item] = x
             except:
                 pass
 
@@ -60,8 +65,10 @@ def orders(req):
             orderIds.append([item, val, rows[0][0]])
 
         conn.commit()
-        print(orderIds)
+        # print(orderIds)
 
+        _, orderHistory = exec_query(conn, historySql)
+        
         return render(req, 'orders.html', {
             'items': items,
             'orderHistory': orderHistory,

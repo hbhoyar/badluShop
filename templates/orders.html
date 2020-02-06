@@ -1,5 +1,17 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <style>
+        /* table {
+            border: 1px solid #000;;
+        } */
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    </style>
+</head>
 
 <body>
 
@@ -37,7 +49,7 @@
         <br><br>
 
         {% if status == "success" %}
-        <div id="status">
+        <div id="status" style="color: green;">
             Success: 
             <table>
                 <tr>
@@ -53,6 +65,12 @@
                 </tr>
                 {% endfor %}
             </table>
+        </div>
+        {% endif %}
+
+        {% if status == "error" %}
+        <div id="status" style="color: red;">
+            Error: {{message}}
         </div>
         {% endif %}
     </form>

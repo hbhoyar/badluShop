@@ -16,11 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 import cs387.views as view
-from .counterview import counter
-from .orders import orders
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', view.login, name='login'),
-    path('orders/', include('badlu.urls'))
+    path('orders/', include('orders.urls'))
 ]
