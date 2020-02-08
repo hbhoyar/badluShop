@@ -21,22 +21,24 @@
         <table>
             <tr>
                 <th>OrderId</th>
-                <th>Item</th>
-                <th>Quantity</th>
+                <th>Samosa</th>
+                <th>Chai</th>
+                <th>Idli</th>
                 <th>Date</th>
             </tr>
-            {% for orderId, item, val, date in orderHistory %}
+            {% for orderId, samosa, chai, idli, date in orderHistory %}
             <tr>
                 <td>{{orderId}}</td>
-                <td>{{item}}</td>
-                <td>{{val}}</td>
+                <td>{{samosa}}</td>
+                <td>{{chai}}</td>
+                <td>{{idli}}</td>
                 <td>{{date}}</td>
             </tr>
             {% endfor %}
         </table>
     </div>
-    <br><br>
 
+    <h3>Place Order</h3>
     <form action="" method="POST">
         {% csrf_token %}
         {% for item in items %}
@@ -44,34 +46,23 @@
         <input type="number" name="{{item}}">
         <br>
         {% endfor %}
-        <input type="submit" value="Submit">
+        <input type="submit" value="Order">
 
-        <br><br>
+        {% if status %}
+        <h3>Order Status</h3>
 
-        {% if status == "success" %}
-        <div id="status" style="color: green;">
-            Success: 
-            <table>
-                <tr>
-                    <th>item</th>
-                    <th>quantity</th>
-                    <th>orderId</th>
-                </tr>
-                {% for item, val, orderId in orders %}
-                <tr>
-                    <td>{{item}}</td>
-                    <td>{{val}}</td>
-                    <td>{{orderId}}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-        {% endif %}
+            {% if status == "success" %}
+            <div id="status" style="color: green;">
+                Success: Your orderId is {{orderId}}
+            </div>
+            {% endif %}
 
-        {% if status == "error" %}
-        <div id="status" style="color: red;">
-            Error: {{message}}
-        </div>
+            {% if status == "error" %}
+            <div id="status" style="color: red;">
+                Error: {{message}}
+            </div>
+            {% endif %}
+
         {% endif %}
     </form>
 

@@ -17,16 +17,15 @@ def exec_query(conn, sql):
     cursor.execute(sql)
     header = list(map(lambda x: x[0], cursor.description))
     rows = cursor.fetchall()
+    cursor.close()
     return (header, rows)
 
 
-def exec_query1(sql):
+def exec_query1(conn, sql):
     """Execute sql query. Return header and rows"""
-    conn = connect()
     cursor = conn.cursor()
     cursor.execute(sql)
     cursor.close()
-    conn.commit()
 
 if __name__ == "__main__":
     from sys import argv

@@ -17,8 +17,8 @@ def login(req):
             return render(req, 'login.html')
 
         sql = f"""select password from addaUsers where loginName='{loginName}'"""
-        headers, data = exec_query(conn, sql)
-        print(data)
+        _, data = exec_query(conn, sql)
+        # print(data)
 
         if not len(data):
             error = "User does not exists"

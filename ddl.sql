@@ -1,19 +1,26 @@
-DROP TABLE IF EXISTS orderHistory;
+DROP TABLE IF EXISTS orderItem;
+DROP TABLE IF EXISTS "order";
 DROP TABLE IF EXISTS addaUsers;
 
 CREATE TABLE addaUsers(
-    loginName VARCHAR(50),
-    password VARCHAR(50),
+    loginName VARCHAR(64),
+    password VARCHAR(64),
     PRIMARY KEY (loginName)
 );
 
-CREATE TABLE orderHistory(
+CREATE TABLE public.order(
     orderId SERIAL,
-    loginName VARCHAR(50), 
-    dateTime TIMESTAMP, 
-    item VARCHAR(6), 
-    itemQuantity SMALLINT,
+    loginName VARCHAR(64), 
+    dateTime TIMESTAMP,
     PRIMARY KEY (orderId),
-    FOREIGN KEY (loginName) REFERENCES addaUsers ON DELETE CASCADE,
+    FOREIGN KEY (loginName) REFERENCES addaUsers ON DELETE CASCADE
+);
+
+CREATE TABLE orderItem(
+    orderId INTEGER,
+    item VARCHAR(6), 
+    itemQuantity INTEGER,
+    PRIMARY KEY (orderId, item),
+    FOREIGN KEY (orderId) REFERENCES public.order ON DELETE CASCADE,
     CHECK (item in ('idli', 'chai', 'samosa'))
 );

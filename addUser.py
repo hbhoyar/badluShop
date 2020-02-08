@@ -8,6 +8,8 @@ password = input('password: ')
 sql = f"""insert into addaUsers values('{loginName}','{password}')"""
 
 try:
-    exec_query1(sql)
+    conn = connect()
+    exec_query1(conn, sql)
+    conn.commit()
 except Exception as e:
     print(e)
