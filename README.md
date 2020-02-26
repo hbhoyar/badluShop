@@ -45,3 +45,10 @@ Edit DATABASES in settings.py<br>
 cd ..
 python3.8 manage.py runserver
 ```
+
+#### Improvements
+
+<ul>
+	<li>Django models not used instead raw sql queries were used</li>
+	<li>Sql injection not prevented</li>
+</ul>
