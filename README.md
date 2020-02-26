@@ -34,3 +34,14 @@ You must use the session mechanism in django (see See 'https://docs.djangoprojec
 For this exercise, I am not too fussy about what the UI looks like (for this exercise!). But for the sake of automated testing, the form fields should have the names 'idli', 'samosa', 'chai', and there should be a  <div id="status"> somewhere in the form that begins with "Success" or "Error". 
 
 </pre>
+
+### Installation
+```
+git clone https://github.com/hbhoyar/badluShop.git
+cd badluShop/cs387
+```
+Edit DATABASES in settings.py<br>
+```
+cd ..
+python3.8 manage.py runserver
+```
